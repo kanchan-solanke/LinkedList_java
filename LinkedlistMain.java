@@ -1,56 +1,69 @@
-class LinkedlistUC6 {
-
-    // Link list node /
-    static class Node {
+class LinkedListUC7 {
+    //Represent a node of the singly linked list
+    class Node{
         int data;
         Node next;
-    }
-
-    // Function to remove the last node
-    // of the linked list /
-    static Node removeLastNode(Node head)
-    {
-        if (head == null)
-            return null;
-
-        if (head.next == null) {
-            return null;
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
         }
-
-        // Find the second last node
-        Node second_last = head;
-        while (second_last.next.next != null)
-            second_last = second_last.next;
-
-        // Change next of second last
-        second_last.next = null;
-
-        return head;
+    }
+    //Represent the head and tail of the singly linked list
+    public Node head = null;
+    public Node tail = null;
+    //addNode() will add a new node to the list
+    public void addNode(int data) {
+        //Create a new node
+        Node newNode = new Node(data);
+        //Checks if the list is empty
+        if(head == null) {
+            //If list is empty, both head and tail will point to new node
+            head = newNode;
+            tail = newNode;
+        }
+        else {
+            //newNode will be added after tail such that tail's next will point to newNode
+            tail.next = newNode;
+            //newNode will become new tail of the list
+            tail = newNode;
+        }
+    }
+    //searchNode() will search for a given node in the list
+    public void searchNode(int data) {
+        Node current = head;
+        int i = 1;
+        boolean flag = false;
+        //Checks whether list is empty
+        if(head == null) {
+            System.out.println("List is empty");
+        }
+        else {
+            while(current != null) {
+                //Compares node to be found with each node present in the list
+                if(current.data == data) {
+                    flag = true;
+                    break;
+                }
+                i++;
+                current = current.next;
+            }
+        }
+        if(flag)
+            System.out.println("Element is present in the list at the node : " + i);
+        else
+            System.out.println("Element is not present in the list");
     }
 
-    // Function to push node at head
-    static Node push(Node head_ref, int new_data)
-    {
-        Node new_node = new Node();
-        new_node.data = new_data;
-        new_node.next = (head_ref);
-        (head_ref) = new_node;
-        return head_ref;
-    }
+    public static void main(String[] args) {
 
-    // Driver code
-    public static void main(String args[])
-    {
-        // Start with the empty list /
-        Node head = null;
+        LinkedListUC7  sList = new LinkedListUC7 ();
 
-        // Use push() function to head
-        head = push(head, 70);
-        head = push(head, 30);
-        head = push(head, 56);
+        //Add nodes to the list
+        sList.addNode(56);
+        sList.addNode(30);
+        sList.addNode(70);
 
-        head = removeLastNode(head);
-        for (Node temp = head; temp != null; temp = temp.next)
-            System.out.print(temp.data + " ");
-    }
-}
+        //Search for node 2 in the list
+        sList.searchNode(30);
+
+    }}
