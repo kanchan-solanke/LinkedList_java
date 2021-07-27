@@ -1,9 +1,7 @@
-import java.io.*;
+public class LinkedlistUC5 {
 
-
-public class LinkedlistUC4 {
-
-    Node head; // head of list
+    private static Node head;
+    //Node head; // head of list
 
     // Linked list Node.
     // This inner class is made static
@@ -14,16 +12,13 @@ public class LinkedlistUC4 {
         Node next;
 
         // Constructor
-        Node(int d)
-        {
+        Node(int d) {
             data = d;
             next = null;
         }
     }
 
-    // Method to insert a new node
-    public static LinkedlistUC4 insert(LinkedlistUC4 list, int data)
-    {
+    public static LinkedlistUC5 insert(LinkedlistUC5 list, int data) {
         // Create a new node with given data
         Node new_node = new Node(data);
         new_node.next = null;
@@ -32,8 +27,7 @@ public class LinkedlistUC4 {
         // then make the new node as head
         if (list.head == null) {
             list.head = new_node;
-        }
-        else {
+        } else {
             // Else traverse till the last node
             // and insert the new_node there
             Node last = list.head;
@@ -50,8 +44,7 @@ public class LinkedlistUC4 {
     }
 
     // Method to print the LinkedList.
-    public static void printList(LinkedlistUC4 list)
-    {
+    public static void printList(LinkedlistUC5 list) {
         Node currNode = list.head;
 
         System.out.print("LinkedList: ");
@@ -66,11 +59,16 @@ public class LinkedlistUC4 {
         }
     }
 
+    private static void deleteFirstNode() {
+        Node temp = head;
+        head = head.next;
+        temp.next = null;
+    }
+
     // Driver code
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         /* Start with the empty list. */
-        LinkedlistUC4 list = new LinkedlistUC4();
+        LinkedlistUC5 list = new LinkedlistUC5();
 
         //
         // ******INSERTION******
@@ -84,5 +82,17 @@ public class LinkedlistUC4 {
 
         // Print the LinkedList
         printList(list);
+
+        list.remove(list, 56);
+
+        printList(list);
     }
+
+    private void remove(LinkedlistUC5 list, int data) {
+        Node temp = head;
+        head = head.next;
+        temp.next = null;
+    }
+
+
 }
