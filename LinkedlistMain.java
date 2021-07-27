@@ -1,98 +1,56 @@
-public class LinkedlistUC5 {
+class LinkedlistUC6 {
 
-    private static Node head;
-    //Node head; // head of list
-
-    // Linked list Node.
-    // This inner class is made static
-    // so that main() can access it
+    // Link list node /
     static class Node {
-
         int data;
         Node next;
-
-        // Constructor
-        Node(int d) {
-            data = d;
-            next = null;
-        }
     }
 
-    public static LinkedlistUC5 insert(LinkedlistUC5 list, int data) {
-        // Create a new node with given data
-        Node new_node = new Node(data);
-        new_node.next = null;
+    // Function to remove the last node
+    // of the linked list /
+    static Node removeLastNode(Node head)
+    {
+        if (head == null)
+            return null;
 
-        // If the Linked List is empty,
-        // then make the new node as head
-        if (list.head == null) {
-            list.head = new_node;
-        } else {
-            // Else traverse till the last node
-            // and insert the new_node there
-            Node last = list.head;
-            while (last.next != null) {
-                last = last.next;
-            }
-
-            // Insert the new_node at last node
-            last.next = new_node;
+        if (head.next == null) {
+            return null;
         }
 
-        // Return the list by head
-        return list;
+        // Find the second last node
+        Node second_last = head;
+        while (second_last.next.next != null)
+            second_last = second_last.next;
+
+        // Change next of second last
+        second_last.next = null;
+
+        return head;
     }
 
-    // Method to print the LinkedList.
-    public static void printList(LinkedlistUC5 list) {
-        Node currNode = list.head;
-
-        System.out.print("LinkedList: ");
-
-        // Traverse through the LinkedList
-        while (currNode != null) {
-            // Print the data at current node
-            System.out.print(currNode.data + " ");
-
-            // Go to next node
-            currNode = currNode.next;
-        }
-    }
-
-    private static void deleteFirstNode() {
-        Node temp = head;
-        head = head.next;
-        temp.next = null;
+    // Function to push node at head
+    static Node push(Node head_ref, int new_data)
+    {
+        Node new_node = new Node();
+        new_node.data = new_data;
+        new_node.next = (head_ref);
+        (head_ref) = new_node;
+        return head_ref;
     }
 
     // Driver code
-    public static void main(String[] args) {
-        /* Start with the empty list. */
-        LinkedlistUC5 list = new LinkedlistUC5();
+    public static void main(String args[])
+    {
+        // Start with the empty list /
+        Node head = null;
 
-        //
-        // ******INSERTION******
-        //
+        // Use push() function to head
+        head = push(head, 70);
+        head = push(head, 30);
+        head = push(head, 56);
 
-        // Insert the values
-        list = insert(list, 56);
-        list = insert(list, 30);
-        list = insert(list, 70);
-
-
-        // Print the LinkedList
-        printList(list);
-
-        list.remove(list, 56);
-
-        printList(list);
+        head = removeLastNode(head);
+        for (Node temp = head; temp != null; temp = temp.next)
+            System.out.print(temp.data + " ");
     }
-
-    private void remove(LinkedlistUC5 list, int data) {
-        Node temp = head;
-        head = head.next;
-        temp.next = null;
-    }
-
-
 }
